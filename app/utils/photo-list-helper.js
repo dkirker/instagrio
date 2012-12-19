@@ -220,7 +220,7 @@ var PhotoListHelper = Class.create((function() {
 									method: 'download',
 									parameters: {
 										target: standardResolution,
-										targetDir: '/media/internal/instagrio',
+										targetDir: '/media/internal/downloads',
 										targetFilename: item.user.username + '_' + item.created_time + '.jpg',
 										keepFilenameOnRedirect: false,
 										subscribe: false

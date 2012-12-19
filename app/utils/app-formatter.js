@@ -72,7 +72,7 @@ var AppFormatter = {
 		}
 	},
 	imageHeight: function(n, model) {
-		var minHeight = Mojo.Environment.DeviceInfo.screenWidth - 20;
+		var minHeight = window.innerWidth - 20;
 		return minHeight + 'px';
 	}
 };

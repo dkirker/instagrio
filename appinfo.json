@@ -1,9 +1,9 @@
 {
-	"id": "bz.tsung.instagrio",
-	"version": "0.0.7",
-	"vendor": "Tsung W.",
+	"id": "com.openmobl.app.instagram",
+	"version": "0.1.0",
+	"vendor": "OpenMobl Systems",
 	"type": "web",
 	"main": "index.html",
-	"title": "instagrio",
+	"title": "instagram",
 	"icon": "icon.png"
 }
