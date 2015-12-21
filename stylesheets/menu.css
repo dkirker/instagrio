@@ -1,0 +1,145 @@
+ #circle-mod{
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+    }
+    
+    #container-circle {
+      position: relative;
+      height: 60px;
+      width: 50px;
+    }
+    
+    #base-button {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 35px;
+      border: 1px solid #B5C491;
+      height: 50px;
+      width: 50px;
+      background: rbga(0,0,0,.8);
+      -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+      -moz-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+      -o-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+      -ms-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+      box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+      padding: 0;
+    }
+    
+    #base-button div span{
+      height: 40px;
+      line-height: 36px;
+      font-size: 40px;
+      display: block;
+      -webkit-transition: all 400ms;
+      -moz-transition: all 400ms;
+      -o-transition: all 400ms;
+      -ms-transition: all 400ms;
+      transition: all 400ms;
+      -webkit-transform: rotate(0);
+      -moz-transform: rotate(0);
+      -o-transform: rotate(0);
+      -ms-transform: rotate(0);
+      transform: rotate(0);
+    }
+    /* rotate the eff out of the main button */
+    #base-button.open div span{
+      transform: rotate(765deg);
+      -webkit-transform: rotate(765deg);
+      -moz-transform: rotate(765deg);
+      -o-transform: rotate(765deg);
+      -ms-transform: rotate(765deg);
+    }
+    
+    /*#db3a2b --> a1ac88
+     * #cf0404 --> B5C491
+     */
+    #base-button div{
+      margin: 4px;
+      height: 40px;
+      width: 40px;
+      background: #A1AC88; /* Old browsers */
+      border-radius: 25px;
+      border: 1px solid #fff;
+      line-height: 36px;
+      text-align: center;
+      color: #fff;
+      font-size: 40px;
+      font-weight: 700;
+      padding: 0;
+    }
+    
+    .btn-toggle{
+      position: absolute;
+      height: 50px;
+      width: 50px;
+      border-radius: 25px;
+      border: 1px solid #B5C491;
+      top: 0px;
+      left: 0px;
+      display:block;
+      background: rbga(0,0,0,.8);
+      -webkit-transition: all 250ms;
+      -moz-transition: all 250ms;
+      -o-transition: all 250ms;
+      -ms-transition: all 250ms;
+      transition: all 250ms;
+      -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+      -moz-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+      -o-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+      -ms-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+      box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+    }
+    
+    .btn-toggle.open{
+      border: 1px solid #000;
+      transition: all 350ms;
+      -webkit-transition: all 350ms;
+      -webkit-transition-timing-function: cubic-bezier(0.250, 0.250, 0.400, 1); /* older webkit */
+      -webkit-transition-timing-function: cubic-bezier(0.250, 0.250, 0.400, 1.650); 
+      transition-timing-function: cubic-bezier(0.250, 0.250, 0.400, 1.650); /* custom */
+    }
+    
+    .btn-toggle div{
+      margin: 5px;
+      width: 40px;
+      height: 40px;
+      background: #222;
+      border-radius: 20px;
+      line-height: 40px;
+      text-align: center;
+      color: #fff;
+      font-size: 12px;
+      display:block;
+    }
+    
+    #nav-home.open{
+      top: -135px;
+      left: 15px;
+    }
+    
+    #nav-hot.open{
+      top: -110px;
+      left: 70px;
+    }
+    
+    #nav-mine.open{
+      top: -68px;
+      left: 115px;
+    }
+    
+    #nav-liked.open{
+      top: -13px;
+      left: 140px;
+    }
+    
+    /* Hack for webkit. WTF?  -  Apparently webkit is off by 10
+    * Sorry for android user default broswer will be off by 10
+    */
+    @media screen and (-webkit-min-device-pixel-ratio:0){
+      #base-button div{
+        line-height: 60px;
+      }
+      
+    }

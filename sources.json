@@ -1,12 +1,20 @@
 [
     {"source": "vendors/date.js"},
+    {"source": "vendors/punycode.min.js"},
+    {"source": "vendors/emoji-list-with-image.js"},
+    {"source": "vendors/emoji.js"},
     {"source": "app/utils/app-formatter.js"},
     {"source": "app/utils/app-handler.js"},
-    {"source": "app/utils/app-sdk.js"},
+    {"source": "app/utils/db-helper.js"},
     {"source": "app/utils/app-db.js"},
+    {"source": "app/utils/app-launcher.js"},
+    {"source": "app/utils/app-sdk.js"},
     {"source": "app/utils/app-menu.js"},
+    {"source": "app/assistants/just-search-assistant.js"},
+    {"source": "app/assistants/photo-tap-assistant.js"},
     {"source": "app/assistants/comment-add-assistant.js"},
 	{"source": "app/utils/photo-list-helper.js"},
+    {"source": "app/assistants/app-assistant.js"},
     {"source": "app/assistants/stage-assistant.js"},
 	{"source": "app/assistants/base-assistant.js"},
     {
@@ -16,6 +24,14 @@
     {
         "scenes": "main",
         "source": "app/assistants/main-assistant.js"
+    },
+    {
+        "scenes": "location-gallery",
+        "source": "app/assistants/location-gallery-assistant.js"
+    },
+    {
+        "scenes": "tag-gallery",
+        "source": "app/assistants/tag-gallery-assistant.js"
     },
     {
         "scenes": "user",
@@ -28,6 +44,10 @@
     {
         "scenes": "comment-list",
         "source": "app/assistants/comment-list-assistant.js"
+    },
+    {
+        "scenes": "photo-gallery",
+        "source": "app/assistants/photo-gallery-assistant.js"
     },
     {
         "scenes": "connect",

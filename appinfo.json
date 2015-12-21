@@ -1,9 +1,31 @@
 {
 	"id": "com.openmobl.app.instagram",
-	"version": "0.1.0",
-	"vendor": "OpenMobl Systems",
+	"version": "0.1.16",
+	"vendor": "Tsung W.",
 	"type": "web",
 	"main": "index.html",
-	"title": "instagram",
-	"icon": "icon.png"
+	"title": "instagrio",
+	"icon": "icon.png",
+	"noWindow": true,
+	"keywords": ["instagram", "photo", "gallery"],
+	"universalSearch": {
+		"search": {
+			"displayName": "Search Instagram User",
+			"url": "bz.tsung.instagrio",
+			"launchParam": {
+				"action": "search-user",
+				"data": "#{searchTerms}"
+			}
+		}, 
+		"action": {
+			"displayName": "Search Instagram Photo with Hashtag",
+			"url": "bz.tsung.instagrio",
+			"launchParam": {
+				"action": "search-tag",
+				"data": "#{searchTerms}"
+			}
+		}
+	},
+	"dockMode": true,
+	"touchstoneMode": "enabled"
 }

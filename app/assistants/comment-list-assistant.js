@@ -3,13 +3,15 @@ var CommentListAssistant = Class.create(BaseAssistant, {
 		$super(media);
 		this.media = media;
 	},
-	setup: function() {
+	setup: function($super) {
+		$super();
 		var that = this;
 		this.controller.setupWidget('comment-list', {
 			itemTemplate: 'comment-list/comment-list-item',
 			listTemplate: 'templates/photo-list',
 			formatters: {
-				index: AppFormatter.index.bind(this)
+				index: AppFormatter.index.bind(this),
+				text: AppFormatter.text.bind(this)
 			},
 			uniquenessProperty: 'id',
 			fixedHeightItems: false,
@@ -46,8 +48,14 @@ var CommentListAssistant = Class.create(BaseAssistant, {
 			user: event.item.from
 		});
 	},
-	activate: function() {
-		if (AppMenu.get().isShow) AppMenu.get().hide(true);
+	activate: function($super) {
+		$super();
+	},
+	deactivate: function($super) {
+		$super();
+	},
+	cleanup: function($super) {
+		$super();
 	}
 });
 

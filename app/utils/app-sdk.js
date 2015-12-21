@@ -22,6 +22,10 @@ AppSDK.loadReq = function(callback, url, urlParams, postParams) {
 		if(AppHandler.access_token != null) {
 			url = AppSDK.addUriParam(url, 'access_token', AppHandler.access_token);
 		}
+
+		if(callback.nextMaxId) {
+			url = AppSDK.addUriParam(url, callback.isTag ? 'max_tag_id' : callback.isLiked ? 'max_like_id' : 'max_id', callback.nextMaxId);
+		}
 		
 		/*
 		if(method == 'put' || method == 'delete') {
@@ -31,7 +35,7 @@ AppSDK.loadReq = function(callback, url, urlParams, postParams) {
 		*/
 	}
 	
-	Mojo.Log.info(AppSDK.TAG, "method " + method + " url " + url);
+	Mojo.Log.error(AppSDK.TAG, "method " + method + " url " + url);
 	
 	if(postParams != null) {
 //		for(var postName in postParams) {
@@ -58,6 +62,9 @@ AppSDK.loadReq = function(callback, url, urlParams, postParams) {
 		//contentType: "application/json",
         onSuccess: (function(transport){
 			Mojo.Log.info(AppSDK.TAG, 'onSuccess');// + transport.responseText);
+			if(callback.nextMaxId) {
+				transport.more = true;
+			}
 			AppHandler.onSuccess(callback, transport, {
 				url: url,
 				urlParams: urlParams,
@@ -66,7 +73,38 @@ AppSDK.loadReq = function(callback, url, urlParams, postParams) {
 			//AppSDK.onSuccess(callback, transport);
 		}),
         onFailure: (function(transport){
-			Mojo.Log.info(AppSDK.TAG, 'onFailure' + transport.responseText);
+			Mojo.Log.info(AppSDK.TAG, 'onFailure: ' + transport.responseText);
+			var error = JSON.parse(transport.responseText);
+			Mojo.Log.info(AppSDK.TAG, 'onFailure: ' + error.meta.error_type);
+			if(error && error.meta && error.meta.error_type) {
+				var errorType = error.meta.error_type;
+				//OAuthAccessTokenException
+				//OAuthException
+				if(errorType.indexOf('OAuth') != -1) {
+					AppDB.removeOAuth({
+						onSuccess: function() {
+							AppHandler.access_token = null;
+							AppHandler.user = null;
+							//launch app to show login
+							setTimeout(function() {
+								Mojo.Log.error('reopen app to connect');
+								AppLauncher.onOpenAPP();
+							}, 10);
+							var mainStage = Mojo.Controller.getAppController().getStageController('main');
+							if (mainStage) {
+								//var currentScene = Mojo.Controller.stageController.activeScene();
+								var currentScene = mainStage.activeScene();
+								if (currentScene != null) {
+									mainStage.popScenesTo('login', {});
+								}
+							}
+						},
+						onFailure: function() {
+							Mojo.Log.error('reopen app to connect22');
+						}
+					});
+				}
+			}
 			AppHandler.onFailure(callback, transport, {
 				url: url,
 				urlParams: urlParams,
@@ -103,6 +141,31 @@ AppSDK.getUser = function(callback, uid) {
 		'doing': 'getUser'
 	};
 	
+	AppSDK.loadReq(callback, url, urlParams);
+}
+
+AppSDK.getUsersSearch = function(callback, who) {
+	var url = '/users/search';
+	
+	var urlParams = {
+		'method': 'get',
+		'doing': 'getUsersSearch',
+		'q': who,
+		'count': 100
+	};
+	
+	AppSDK.loadReq(callback, url, urlParams);
+}
+
+AppSDK.getTagsSearch = function(callback, tag) {
+	var url = '/tags/' + tag + '/media/recent';
+	var urlParams = {
+		'method': 'get',
+		'doing': 'getTagsSearch',
+		//'q': tag,
+		'count': 100
+	};
+
 	AppSDK.loadReq(callback, url, urlParams);
 }
 
@@ -174,6 +237,7 @@ AppSDK.ACTION_DENY = 'deny';
 
 AppSDK.RELATION_NONE = 'none';
 AppSDK.RELATION_FOLLOWING = 'follows';
+AppSDK.RELATION_REQUESTED = 'requested';
 //AppSDK.RELATION_FOLLOWED = ''
 
 AppSDK.postUserRelationship = function(callback, uid, action) {
@@ -252,6 +316,58 @@ AppSDK.getMediaComments = function(callback, media) {
 		'method': 'get',
 		'doing': 'getMediaComments'
 	};
+
+	AppSDK.loadReq(callback, url, urlParams);
+};
+
+AppSDK.getMediaSearch = function(callback, lat, lng) {
+	var url = '/media/search';
+
+	var urlParams = {
+		'method': 'get',
+		'doing': 'getMediaSearch',
+		'lat': lat,
+		'lng': lng
+	}
+
+	AppSDK.loadReq(callback, url, urlParams);
+};
+
+AppSDK.getLocationsSearch = function(callback, lat, lng, distance) {
+	if(!distance) {
+		distance = 5000;
+	}
+	var url = '/locations/search';
+
+	var urlParams = {
+		'method': 'get',
+		'doing': 'getLocationsSearch',
+		'lat': lat,
+		'lng': lng,
+		'distance': distance
+	}
+
+	AppSDK.loadReq(callback, url, urlParams);
+};
+
+AppSDK.getUsersFollows = function(callback, who) {
+	var url = '/users/' + who + '/follows';
+
+	var urlParams = {
+		'method': 'get',
+		'doing': 'getUsersFollows'
+	}
+
+	AppSDK.loadReq(callback, url, urlParams);
+};
+
+AppSDK.getUsersFollowedBy = function(callback, who) {
+	var url = '/users/' + who + '/followed-by';
+
+	var urlParams = {
+		'method': 'get',
+		'doing': 'getUsersFollowedBy'
+	}
 
 	AppSDK.loadReq(callback, url, urlParams);
 };

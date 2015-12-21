@@ -45,29 +45,50 @@ body {
     background: transparent url("../images/connect_via_instagram_button.png") no-repeat 0 0;
 }
 
-/* nav bar */
-#nav-bar {
-	position:fixed;
-	bottom:0;
-	left:0;
-	background:rgba(0,0,0,0.8);
-	padding-top:7px;
-	width:50%;
+/* photo tool bar */
+#tool-bar {
+	padding-top: 30px;
+	width:100%;
 }
-.nav li {
+.tool-bar {
+	padding-top:7px;
+	background:rgba(0,0,0,0.8);
+}
+.tool-bar li {
     float: left;
-    width: 50%;
+    width: 33%;
     text-align: center
 }
 
-.nav li span {
+.tool-bar li span {
     padding: 4px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
+    padding-top: 35px;
 }
 
-.nav li span.active {
-	color: white;
+.tool-bar #comment span {
+  background: url(../images/icons/comment.png) no-repeat top;
+}
+
+.tool-bar #save span {
+  background: url(../images/icons/save.png) no-repeat top;
+}
+
+.tool-bar #like span {
+  background: url(../images/icons/love.png) no-repeat top;
+}
+
+.tool-bar #cancel span {
+  background: url(../images/icons/cancel.png) no-repeat top;
+}
+
+.tool-bar #search-user span {
+  background: url(../images/icons/search_user.png) no-repeat top;
+}
+
+.tool-bar #search-hashtag span {
+  background: url(../images/icons/search_hashtag.png) no-repeat top;
 }
 
 /* feed item */
@@ -102,13 +123,35 @@ ol, ul {
 }
 
 .counts {
-	color: #A1AC88;	
-    font-weight: bold;
+    position: relative;
+    float: left;
+    width: 27%;
+    overflow: hidden;
+    font-size: 14px;
+    text-align: center;
+    background: white;
+    margin-right: 5px;
+    margin-top: 5px;
+    display:block;
 }
 
-.counts-value {
+.counts .counts-title{
+	color: #A1AC88;	
+  font-weight: bold;
+}
+
+.counts .counts-num{
 	color: #757575;	
-    font-weight: bold;
+  font-weight: bold;
+	white-space:nowrap;
+	word-break:keep-all;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.content {
+  color: #A1AC88;	
+  font-weight: bold;
 }
 
 .location {
@@ -162,6 +205,25 @@ ol, ul {
 
 .unliked {
   background: url(../images/icons/unliked.png) no-repeat left;
+}
+
+.video {
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  border: #solid 10px #000; /* fallback for browsers that don't understand rgba */
+  background-color: rgba(0,0,0,0.7);/* slighly transparent white */
+  border-color: solid 10px rgba(0,0,0,0.2); /*Very transparent black*/
+  color: white;
+  padding: 5px;
+}
+
+.videoContent {
+  padding-left: 30px;
+}
+
+.hasVideo {
+  background: url(../images/icons/video.png) no-repeat left;
 }
 
 .user-item-dark {
